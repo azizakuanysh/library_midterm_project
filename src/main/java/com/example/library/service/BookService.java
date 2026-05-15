@@ -23,18 +23,28 @@ public class BookService {
     private final AuthorRepository authorRepository;
 
     public Book create(BookDto dto) {
+
         log.info("Creating book");
 
         Author author = authorRepository.findById(dto.getAuthorId())
                 .orElseThrow(() -> new ResourceNotFoundException("Author not found"));
+
         Book book = new Book();
+
         book.setTitle(dto.getTitle());
         book.setIsbn(dto.getIsbn());
         book.setAvailable(dto.getAvailable());
         book.setAuthor(author);
 
-        return bookRepository.save(book);
+        Book savedBook = bookRepository.save(book);
+
+        asyncService.sendBookCreatedNotification(savedBook.getTitle());
+
+        asyncService.generateBookReport();
+
+        return savedBook;
     }
+
 
     public Book getById(Long id) {
         return bookRepository.findById(id)
@@ -69,4 +79,5 @@ public class BookService {
     public List<Book> filterByAvailability(boolean available) {
         return bookRepository.findByAvailable(available);
     }
+    private final AsyncService asyncService = new AsyncService();
 }
