@@ -1,8 +1,7 @@
 package com.example.library.entity;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +18,8 @@ public class Author {
     private Long id;
     private String name;
     private String nationality;
-
+    @JsonIgnore
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Book> books = new ArrayList<>();
+
 }

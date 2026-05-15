@@ -25,7 +25,6 @@ public class BookService {
 
         Author author = authorRepository.findById(dto.getAuthorId())
                 .orElseThrow(() -> new ResourceNotFoundException("Author not found"));
-
         Book book = new Book();
         book.setTitle(dto.getTitle());
         book.setIsbn(dto.getIsbn());
