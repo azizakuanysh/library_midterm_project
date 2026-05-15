@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/books")
@@ -16,7 +18,14 @@ import org.springframework.data.domain.Pageable;
 public class BookController {
 
     private final BookService bookService;
-
+    @GetMapping("/search")
+    public List<Book> searchBooks(@RequestParam String title) {
+        return bookService.searchByTitle(title);
+    }
+    @GetMapping("/filter")
+    public List<Book> filterBooks(@RequestParam boolean available) {
+        return bookService.filterByAvailability(available);
+    }
     // CREATE
     @PostMapping
     public Book create(@Valid @RequestBody BookDto dto) {
@@ -46,4 +55,5 @@ public class BookController {
     public void delete(@PathVariable Long id) {
         bookService.delete(id);
     }
+
 }

@@ -62,4 +62,11 @@ public class BookService {
         Book book = getById(id);
         bookRepository.delete(book);
     }
+    public List<Book> searchByTitle(String title) {
+        return bookRepository.findByTitleContainingIgnoreCase(title);
+    }
+
+    public List<Book> filterByAvailability(boolean available) {
+        return bookRepository.findByAvailable(available);
+    }
 }
