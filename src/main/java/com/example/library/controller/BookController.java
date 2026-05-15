@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
-
+import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
 @RequestMapping("/books")
@@ -31,8 +31,7 @@ public class BookController {
     public Book create(@Valid @RequestBody BookDto dto) {
         return bookService.create(dto);
     }
-
-    // GET ALL
+    @Operation(summary = "Get all books")
     @GetMapping
     public Page<Book> getAll(Pageable pageable) {
         return bookService.getAll(pageable);

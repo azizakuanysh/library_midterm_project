@@ -6,7 +6,7 @@ import com.example.library.exception.ResourceNotFoundException;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 
 
@@ -23,7 +23,7 @@ public class AuthorController {
         return authorRepository.save(author);
     }
 
-    // GET ALL
+    @Operation(summary = "Get all authors")
     @GetMapping
     public List<Author> getAll() {
         return authorRepository.findAll();

@@ -6,7 +6,7 @@ import com.example.library.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
+import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 
 @RestController
@@ -24,7 +24,7 @@ public class UserController {
     public User getById(@PathVariable Long id) {
         return userService.getById(id);
     }
-
+    @Operation(summary = "Get all users")
     @GetMapping
     public List<User> getAll() {
         return userService.getAll();
