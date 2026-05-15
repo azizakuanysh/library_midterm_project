@@ -8,6 +8,8 @@ import com.example.library.repository.AuthorRepository;
 import com.example.library.repository.BookRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,10 +41,9 @@ public class BookService {
                 .orElseThrow(() -> new ResourceNotFoundException("Book not found"));
     }
 
-    public List<Book> getAll() {
-        return bookRepository.findAll();
+    public Page<Book> getAll(Pageable pageable) {
+        return bookRepository.findAll(pageable);
     }
-
     public Book update(Long id, BookDto dto) {
         Book book = getById(id);
 

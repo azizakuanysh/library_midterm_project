@@ -6,8 +6,9 @@ import com.example.library.service.BookService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/books")
@@ -24,8 +25,8 @@ public class BookController {
 
     // GET ALL
     @GetMapping
-    public List<Book> getAll() {
-        return bookService.getAll();
+    public Page<Book> getAll(Pageable pageable) {
+        return bookService.getAll(pageable);
     }
 
     // GET BY ID
@@ -45,5 +46,4 @@ public class BookController {
     public void delete(@PathVariable Long id) {
         bookService.delete(id);
     }
-
 }
