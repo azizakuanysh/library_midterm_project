@@ -22,10 +22,13 @@ public class User {
     private String fullName;
 
     private String email;
-
+    private String password;
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Profile profile;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Loan> loans = new ArrayList<>();
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
