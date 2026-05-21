@@ -10,7 +10,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 @RequiredArgsConstructor
 public class UserController {
 

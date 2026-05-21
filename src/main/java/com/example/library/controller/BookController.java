@@ -21,7 +21,7 @@ import java.util.List;
 import io.swagger.v3.oas.annotations.Operation;
 
 @RestController
-@RequestMapping("/books")
+@RequestMapping("/api/books")
 @RequiredArgsConstructor
 public class BookController {
 

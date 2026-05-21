@@ -1,30 +1,27 @@
 package com.example.library.config;
 
-import io.swagger.v3.oas.models.*;
+import io.swagger.v3.oas.annotations.enums.SecuritySchemeType;
+import io.swagger.v3.oas.annotations.security.SecurityScheme;
+import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
-import io.swagger.v3.oas.models.security.*;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@SecurityScheme(
+        name = "bearerAuth",
+        type = SecuritySchemeType.HTTP,
+        scheme = "bearer",
+        bearerFormat = "JWT"
+)
 public class OpenApiConfig {
 
     @Bean
-    public OpenAPI customOpenAPI() {
-
+    public OpenAPI libraryOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("Library API")
-                        .version("1.0")
-                        .description("Library System API"))
-                .addSecurityItem(new SecurityRequirement().addList("bearerAuth"))
-                .components(new Components()
-                        .addSecuritySchemes("bearerAuth",
-                                new SecurityScheme()
-                                        .type(SecurityScheme.Type.HTTP)
-                                        .scheme("bearer")
-                                        .bearerFormat("JWT")
-                        )
-                );
+                        .title("Library Management API")
+                        .description("JWT secured REST API")
+                        .version("1.0"));
     }
 }
